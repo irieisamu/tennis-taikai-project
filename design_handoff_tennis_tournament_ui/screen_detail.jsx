@@ -172,7 +172,7 @@ function TabOverview() {
         padding: '12px 14px', marginTop: 12, background: T.paper,
         border: `1px solid ${T.line}`, borderRadius: 3, textDecoration: 'none', color: T.ink,
       }}>
-        <span style={{ fontSize: 12.5, fontWeight: 600 }}>過去の大会結果はこちら</span>
+        <span style={{ fontSize: 12.5, fontWeight: 600 }}>過去の大会結果・レポートはこちら</span>
         <svg width="8" height="12" viewBox="0 0 8 12"><path d="M1 1l6 5-6 5" stroke={T.brandDeep} strokeWidth="1.6" fill="none" strokeLinecap="round"/></svg>
       </a>
 
