@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>テニス大会UI · 全5画面</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #f0eee9; }
+  #root { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="ios_frame.jsx"></script>
+<script type="text/babel" src="design_canvas.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="screen_top.jsx"></script>
+<script type="text/babel" src="screen_list.jsx"></script>
+<script type="text/babel" src="screen_detail.jsx"></script>
+<script type="text/babel" src="screen_report.jsx"></script>
+<script type="text/babel" src="screen_coach.jsx"></script>
+
+<script type="text/babel">
+const PHONE_W = 375;
+const PHONE_H = 812;
+
+// iPhone実機フレームで囲むラッパ
+function Phone({ children }) {
+  return (
+    <IOSDevice width={PHONE_W} height={PHONE_H} dark={false}>
+      <div style={{ paddingTop: 44 }}>{children}</div>
+    </IOSDevice>
+  );
+}
+
+const SCREENS = [
+  { id: 'top', label: 'TOP · 検索', comp: <ScreenTop /> },
+  { id: 'list', label: '一覧 · 統合結果', comp: <ScreenList /> },
+  { id: 'detail', label: '詳細 · 大会情報', comp: <ScreenDetail /> },
+  { id: 'report', label: '大会レポート一覧', comp: <ScreenReport /> },
+  { id: 'coach', label: 'コーチ求人', comp: <ScreenCoach /> },
+];
+
+function App() {
+  return (
+    <DesignCanvas>
+      <DCPostIt x={40} y={20} w={340}>
+        {`テニス大会UI · 5画面\n・スマホ 375px · iPhone実機フレーム\n・ダークグリーン(#1a2e1f) × tennis365グリーン(#6C9E1D) × クリーム(#F7F4EC)\n・情報密度高めのコンパクトリスト。条件から探すは全て閉じたアコーディオン。\n・詳細は概要 / 大会情報 / 会場 / その他の4タブに分割し、下部に固定申込CTA。`}
+      </DCPostIt>
+
+      <DCSection id="main" title="Tennis Tournament · Mobile UI" subtitle="5 screens · iPhone 375">
+        {SCREENS.map(s => (
+          <DCArtboard key={s.id} id={s.id} label={s.label} width={PHONE_W + 40} height={PHONE_H + 40}>
+            <div data-screen-label={s.label} style={{ padding: 20, background: '#f0eee9', width: '100%', height: '100%', display: 'grid', placeItems: 'start center' }}>
+              <Phone>{s.comp}</Phone>
+            </div>
+          </DCArtboard>
+        ))}
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
