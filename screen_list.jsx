@@ -1,28 +1,29 @@
 // screen_list.jsx — 一覧（Tennis365 / スクール 混在＋主催列）
 function ScreenList() {
   const [filtersOpen, setFiltersOpen] = React.useState(false);
-  // 開催日順（昇順）に整列。Tennis365・スクールを混在させた統合結果20件。
+  // 月ナビが「2026/07」を選択中のため、表示される20件は全て7月の日付に揃え、
+  // 開催日順（昇順）に整列（曜日は2026年7月の実カレンダーに準拠）。
   const items = [
-    { ...MOCKS[3], hostType: 'school' },               // 07/06
-    { ...MOCKS[0], hostType: 'tennis365' },             // 07/12
-    { ...MOCKS[4], hostType: 'school' },                // 07/13
-    { ...MOCKS[1], hostType: 'tennis365' },             // 07/19
-    { ...MOCKS[5], hostType: 'school' },                // 07/21
-    { ...MOCKS[2], hostType: 'tennis365' },             // 07/25
-    { ...MOCKS[6], hostType: 'tennis365' },             // 08/02
-    { ...MOCKS[7], hostType: 'tennis365' },             // 08/09
-    { ...SCHOOL_TOURNAMENTS[3], hostType: 'school' },   // 08/12
-    { ...SCHOOL_TOURNAMENTS[4], hostType: 'school' },   // 08/12
-    { ...SCHOOL_TOURNAMENTS[1], hostType: 'school' },   // 08/13
-    { ...SCHOOL_TOURNAMENTS[2], hostType: 'school' },   // 08/13
-    { ...SCHOOL_TOURNAMENTS[0], hostType: 'school' },   // 08/14
-    { ...MOCKS[8], hostType: 'tennis365' },             // 08/16
-    { ...MOCKS[9], hostType: 'tennis365' },             // 08/23
-    { ...SCHOOL_TOURNAMENTS[8], hostType: 'school' },   // 09/12
-    { ...SCHOOL_TOURNAMENTS[9], hostType: 'school' },   // 09/12
-    { ...SCHOOL_TOURNAMENTS[6], hostType: 'school' },   // 09/19
-    { ...SCHOOL_TOURNAMENTS[7], hostType: 'school' },   // 09/19
-    { ...SCHOOL_TOURNAMENTS[5], hostType: 'school' },   // 09/26
+    { ...MOCKS[3], hostType: 'school', date: '07/01', weekday: '水' },
+    { ...MOCKS[0], hostType: 'tennis365', date: '07/03', weekday: '金' },
+    { ...MOCKS[4], hostType: 'school', date: '07/04', weekday: '土' },
+    { ...MOCKS[1], hostType: 'tennis365', date: '07/06', weekday: '月' },
+    { ...MOCKS[5], hostType: 'school', date: '07/07', weekday: '火' },
+    { ...MOCKS[2], hostType: 'tennis365', date: '07/09', weekday: '木' },
+    { ...MOCKS[6], hostType: 'tennis365', date: '07/10', weekday: '金' },
+    { ...MOCKS[7], hostType: 'tennis365', date: '07/12', weekday: '日' },
+    { ...SCHOOL_TOURNAMENTS[3], hostType: 'school', date: '07/13', weekday: '月' },
+    { ...SCHOOL_TOURNAMENTS[4], hostType: 'school', date: '07/15', weekday: '水' },
+    { ...SCHOOL_TOURNAMENTS[1], hostType: 'school', date: '07/16', weekday: '木' },
+    { ...SCHOOL_TOURNAMENTS[2], hostType: 'school', date: '07/18', weekday: '土' },
+    { ...SCHOOL_TOURNAMENTS[0], hostType: 'school', date: '07/19', weekday: '日' },
+    { ...MOCKS[8], hostType: 'tennis365', date: '07/21', weekday: '火' },
+    { ...MOCKS[9], hostType: 'tennis365', date: '07/22', weekday: '水' },
+    { ...SCHOOL_TOURNAMENTS[8], hostType: 'school', date: '07/24', weekday: '金' },
+    { ...SCHOOL_TOURNAMENTS[9], hostType: 'school', date: '07/25', weekday: '土' },
+    { ...SCHOOL_TOURNAMENTS[6], hostType: 'school', date: '07/27', weekday: '月' },
+    { ...SCHOOL_TOURNAMENTS[7], hostType: 'school', date: '07/28', weekday: '火' },
+    { ...SCHOOL_TOURNAMENTS[5], hostType: 'school', date: '07/30', weekday: '木' },
   ];
 
   return (
