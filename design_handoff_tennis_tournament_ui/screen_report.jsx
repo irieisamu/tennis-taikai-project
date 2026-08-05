@@ -1,12 +1,12 @@
 // screen_report.jsx — 大会レポート一覧（スクールごと）
 function ScreenReport() {
   const reports = [
-    { date: '2026.06.15', title: '365cup ダブルス初中級大会', tag: '一般', highlight: true },
-    { date: '2026.05.22', title: '365cup 女子シングルス 中級大会', tag: '一般', highlight: false },
+    { date: '2026.06.15', title: 'HATSカップ ダブルス初中級大会', tag: '一般', highlight: true },
+    { date: '2026.05.22', title: 'HATSカップ 女子シングルス 中級大会', tag: '一般', highlight: false },
     { date: '2026.05.05', title: 'GW特別 団体戦カップ', tag: '一般', highlight: false },
-    { date: '2026.04.14', title: '春の365cup ジュニアU15', tag: 'ジュニア', highlight: false },
+    { date: '2026.04.14', title: '春のHATSカップ ジュニアU15', tag: 'ジュニア', highlight: false },
     { date: '2026.03.20', title: 'スプリング男子ダブルス オープン', tag: '一般', highlight: false },
-    { date: '2026.02.11', title: '冬の365cup ミックスダブルス', tag: '一般', highlight: false },
+    { date: '2026.02.11', title: '冬のHATSカップ ミックスダブルス', tag: '一般', highlight: false },
   ];
 
   return (
@@ -29,7 +29,7 @@ function ScreenReport() {
           </div>
           <div style={{ minWidth: 0 }}>
             <div className="ts-en" style={{ fontSize: 9.5, color: T.brand, letterSpacing: '0.14em', fontWeight: 700, marginBottom: 2 }}>SCHOOL</div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: T.ink, letterSpacing: '0.01em' }}>Tennis365 大会運営部</div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: T.ink, letterSpacing: '0.01em' }}>HATS Tennis Academy</div>
             <div style={{ fontSize: 11, color: T.muted, marginTop: 2 }}>東京都 · 大会主催歴 12年</div>
           </div>
         </div>

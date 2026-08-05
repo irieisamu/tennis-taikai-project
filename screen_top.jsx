@@ -1,6 +1,6 @@
 // screen_top.jsx — TOP
 function ScreenTop() {
-  const [filtersOpen, setFiltersOpen] = React.useState(false);
+  const [filtersOpen, setFiltersOpen] = React.useState(true);
 
   return (
     <div className="ts-screen ts-tap" style={{ minHeight: '100%', paddingBottom: 40 }}>
@@ -28,7 +28,7 @@ function ScreenTop() {
             全国のテニス大会を、<br/>もっと簡単に。
           </h1>
           <p style={{ fontSize: 11.5, color: '#c4d0c1', margin: 0, lineHeight: 1.6 }}>
-            Tennis365主催・全国スクール主催の大会を横断検索
+            全国のスクール主催大会を横断検索
           </p>
         </div>
       </div>
@@ -112,30 +112,16 @@ function ScreenTop() {
         </button>
       </div>
 
-      {/* Tennis365主催 */}
-      <TsSectionHead eyebrow="OFFICIAL" title="Tennis365 主催大会" />
+      {/* スクール主催 */}
+      <TsSectionHead eyebrow="SCHOOLS" title="スクール主催大会" />
       <div style={{ margin: '0 16px' }}>
-        {MOCKS.slice(0, 5).map((m, i) => <ResultCard key={i} {...m} />)}
+        {SCHOOL_TOURNAMENTS.map((m, i) => <ResultCard key={i} {...m} />)}
       </div>
       <div style={{ padding: '4px 16px 4px' }}>
         <TsBtn full size="lg" variant="outline">
           もっと見る
           <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1 5h8M5 1l4 4-4 4" stroke={T.brandDeep} strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </TsBtn>
-      </div>
-
-      {/* スクール主催 */}
-      <div style={{ marginTop: 8 }}>
-        <TsSectionHead eyebrow="SCHOOLS" title="スクール主催大会" />
-        <div style={{ margin: '0 16px' }}>
-          {SCHOOL_TOURNAMENTS.map((m, i) => <ResultCard key={i} {...m} />)}
-        </div>
-        <div style={{ padding: '4px 16px 4px' }}>
-          <TsBtn full size="lg" variant="outline">
-            もっと見る
-            <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1 5h8M5 1l4 4-4 4" stroke={T.brandDeep} strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </TsBtn>
-        </div>
       </div>
 
       {/* スクール向けCTA */}
@@ -269,16 +255,9 @@ function TsFooter() {
 }
 
 const MOCKS = [
-  { date: '07/12', weekday: '日', pref: '東京都', venue: '京王テニスクラブ', title: '365cup Tecnifibreボール CUP 団体戦 (初級〜中級)', cat: '一般', type: '団体戦', level: '初〜中級', status: 'open' },
-  { date: '07/19', weekday: '日', pref: '神奈川県', venue: '藤沢テニスパーク', title: '365cup 男子ダブルス オープンクラス', cat: '一般', type: '男子ダブルス', level: 'オープン', status: 'fill' },
-  { date: '07/25', weekday: '土', pref: '千葉県', venue: '柏の葉公園コート', title: '365cup 女子シングルス 中級大会', cat: '一般', type: '女子シングルス', level: '中級', status: 'wait' },
   { date: '07/06', weekday: '日', pref: '東京都', venue: 'HATS Tennis Academy', title: 'HATS夏の団体戦 〜チーム対抗ダブルス〜', cat: '一般', type: '団体戦', level: '初中級', status: 'open', host: 'HATS Tennis Academy' },
   { date: '07/13', weekday: '日', pref: '神奈川県', venue: '荏原湘南 藤沢本校', title: '荏原SSC 夏季ミックスダブルス大会', cat: '一般', type: '混合ダブルス', level: '中上級', status: 'open', host: '荏原湘南スポーツセンター' },
   { date: '07/21', weekday: '火', pref: '東京都', venue: 'ITCテニスビレッジ多摩', title: 'ITCジュニアサマーカップ U15', cat: 'ジュニア', type: '男子シングルス', level: '初中級', status: 'close', host: 'ITCテニススクール' },
-  { date: '08/02', weekday: '日', pref: '大阪府', venue: '長居公園テニスコート', title: '365cup 混合ダブルス 中上級大会', cat: '一般', type: '混合ダブルス', level: '中上級', status: 'open' },
-  { date: '08/09', weekday: '日', pref: '愛知県', venue: '名古屋市総合体育館コート', title: '365cup 団体戦 サマーカップ', cat: '一般', type: '団体戦', level: '初中級', status: 'open' },
-  { date: '08/16', weekday: '日', pref: '埼玉県', venue: '埼玉スタジアムテニスコート', title: '365cup 女子ダブルス 埼玉大会', cat: '一般', type: '女子ダブルス', level: '中級', status: 'open' },
-  { date: '08/23', weekday: '日', pref: '兵庫県', venue: '神戸ポートアイランドテニスセンター', title: '365cup 男子シングルス 関西オープン', cat: '一般', type: '男子シングルス', level: 'オープン', status: 'open' },
 ];
 
 // TOP画面「スクール主催大会」用（レオーネカップ・東京都開催10件）

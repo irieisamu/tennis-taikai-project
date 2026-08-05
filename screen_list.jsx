@@ -1,29 +1,22 @@
-// screen_list.jsx — 一覧（Tennis365 / スクール 混在＋主催列）
+// screen_list.jsx — 一覧（スクール主催大会のみ）
 function ScreenList() {
-  const [filtersOpen, setFiltersOpen] = React.useState(false);
-  // 月ナビが「2026/07」を選択中のため、表示される20件は全て7月の日付に揃え、
+  const [filtersOpen, setFiltersOpen] = React.useState(true);
+  // 月ナビが「2026/07」を選択中のため、表示される13件は全て7月の日付に揃え、
   // 開催日順（昇順）に整列（曜日は2026年7月の実カレンダーに準拠）。
   const items = [
-    { ...MOCKS[3], hostType: 'school', date: '07/01', weekday: '水' },
-    { ...MOCKS[0], hostType: 'tennis365', date: '07/03', weekday: '金' },
-    { ...MOCKS[4], hostType: 'school', date: '07/04', weekday: '土' },
-    { ...MOCKS[1], hostType: 'tennis365', date: '07/06', weekday: '月' },
-    { ...MOCKS[5], hostType: 'school', date: '07/07', weekday: '火' },
-    { ...MOCKS[2], hostType: 'tennis365', date: '07/09', weekday: '木' },
-    { ...MOCKS[6], hostType: 'tennis365', date: '07/10', weekday: '金' },
-    { ...MOCKS[7], hostType: 'tennis365', date: '07/12', weekday: '日' },
-    { ...SCHOOL_TOURNAMENTS[3], hostType: 'school', date: '07/13', weekday: '月' },
-    { ...SCHOOL_TOURNAMENTS[4], hostType: 'school', date: '07/15', weekday: '水' },
-    { ...SCHOOL_TOURNAMENTS[1], hostType: 'school', date: '07/16', weekday: '木' },
-    { ...SCHOOL_TOURNAMENTS[2], hostType: 'school', date: '07/18', weekday: '土' },
-    { ...SCHOOL_TOURNAMENTS[0], hostType: 'school', date: '07/19', weekday: '日' },
-    { ...MOCKS[8], hostType: 'tennis365', date: '07/21', weekday: '火' },
-    { ...MOCKS[9], hostType: 'tennis365', date: '07/22', weekday: '水' },
-    { ...SCHOOL_TOURNAMENTS[8], hostType: 'school', date: '07/24', weekday: '金' },
-    { ...SCHOOL_TOURNAMENTS[9], hostType: 'school', date: '07/25', weekday: '土' },
-    { ...SCHOOL_TOURNAMENTS[6], hostType: 'school', date: '07/27', weekday: '月' },
-    { ...SCHOOL_TOURNAMENTS[7], hostType: 'school', date: '07/28', weekday: '火' },
-    { ...SCHOOL_TOURNAMENTS[5], hostType: 'school', date: '07/30', weekday: '木' },
+    { ...MOCKS[0], date: '07/01', weekday: '水' },
+    { ...MOCKS[1], date: '07/04', weekday: '土' },
+    { ...MOCKS[2], date: '07/07', weekday: '火' },
+    { ...SCHOOL_TOURNAMENTS[3], date: '07/13', weekday: '月' },
+    { ...SCHOOL_TOURNAMENTS[4], date: '07/15', weekday: '水' },
+    { ...SCHOOL_TOURNAMENTS[1], date: '07/16', weekday: '木' },
+    { ...SCHOOL_TOURNAMENTS[2], date: '07/18', weekday: '土' },
+    { ...SCHOOL_TOURNAMENTS[0], date: '07/19', weekday: '日' },
+    { ...SCHOOL_TOURNAMENTS[8], date: '07/24', weekday: '金' },
+    { ...SCHOOL_TOURNAMENTS[9], date: '07/25', weekday: '土' },
+    { ...SCHOOL_TOURNAMENTS[6], date: '07/27', weekday: '月' },
+    { ...SCHOOL_TOURNAMENTS[7], date: '07/28', weekday: '火' },
+    { ...SCHOOL_TOURNAMENTS[5], date: '07/30', weekday: '木' },
   ];
 
   return (
@@ -141,7 +134,7 @@ function SortBtn({ children, active }) {
 
 // 一覧行: 主催列を追加した圧縮版
 // 表示優先順位: 日付 > 都道府県 > 大会名 > 種別 > レベル > 受付中
-function ResultRow({ date, weekday, pref, title, type, level, status, hostType }) {
+function ResultRow({ date, weekday, pref, title, type, level, status }) {
   const statusMap = {
     open: { text: '受付中', variant: 'brand' },
     fill: { text: '残りわずか', variant: 'accent' },
@@ -149,29 +142,21 @@ function ResultRow({ date, weekday, pref, title, type, level, status, hostType }
     close: { text: '受付終了', variant: 'ink' },
   };
   const st = statusMap[status];
-  const hostLabel = hostType === 'tennis365' ? 'Tennis365 主催' : 'スクール主催';
 
   return (
     <a style={{
       display: 'block', padding: '12px 14px 10px', marginBottom: 8,
       background: T.paper, border: `1px solid ${T.line}`, borderRadius: 4, textDecoration: 'none', color: 'inherit',
     }}>
-      {/* 主催ラベル */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-        <span style={{
-          fontSize: 9.5, fontWeight: 700, letterSpacing: '0.08em',
-          color: hostType === 'tennis365' ? T.brandDeep : '#7a5a15',
-          background: hostType === 'tennis365' ? T.brandTint : T.accentTint,
-          padding: '2px 6px', borderRadius: 2, border: `1px solid ${hostType === 'tennis365' ? '#d4e0b0' : '#e8d4a2'}`,
-        }}>{hostLabel}</span>
+      {/* 日付＋都道府県＋受付状況 */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 6 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span className="ts-en" style={{ fontSize: 15, fontWeight: 800, color: T.ink, letterSpacing: '0.02em' }}>{date}</span>
+          <span style={{ fontSize: 10.5, color: weekday === '日' ? T.danger : weekday === '土' ? '#2f6db5' : T.muted, fontWeight: 600 }}>({weekday})</span>
+          <div style={{ width: 1, height: 11, background: T.lineSoft, margin: '0 2px', flexShrink: 0 }} />
+          <span style={{ fontSize: 11.5, color: T.inkSoft, fontWeight: 600 }}>{pref}</span>
+        </div>
         <TsBadge variant={st.variant} size="sm">{st.text}</TsBadge>
-      </div>
-      {/* 日付＋都道府県 */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-        <span className="ts-en" style={{ fontSize: 15, fontWeight: 800, color: T.ink, letterSpacing: '0.02em' }}>{date}</span>
-        <span style={{ fontSize: 10.5, color: weekday === '日' ? T.danger : weekday === '土' ? '#2f6db5' : T.muted, fontWeight: 600 }}>({weekday})</span>
-        <div style={{ width: 1, height: 11, background: T.lineSoft, margin: '0 2px', flexShrink: 0 }} />
-        <span style={{ fontSize: 11.5, color: T.inkSoft, fontWeight: 600 }}>{pref}</span>
       </div>
       {/* 大会名 */}
       <div style={{ fontSize: 13.5, fontWeight: 700, color: T.ink, lineHeight: 1.45, marginBottom: 8, letterSpacing: '0.01em' }}>

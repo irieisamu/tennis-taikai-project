@@ -1,14 +1,11 @@
-// screen_list.jsx — 一覧（Tennis365 / スクール 混在＋主催列）
+// screen_list.jsx — 一覧（スクール主催大会のみ）
 function ScreenList() {
-  const [open, setOpen] = React.useState({ month: false, pref: false, cat: false, type: false, level: false });
+  const [open, setOpen] = React.useState({ month: true, pref: true, cat: true, type: true, level: true });
   const toggle = (k) => setOpen(o => ({ ...o, [k]: !o[k] }));
   const items = [
-    { ...MOCKS[0], hostType: 'tennis365' },
-    { ...MOCKS[3], hostType: 'school' },
-    { ...MOCKS[1], hostType: 'tennis365' },
-    { ...MOCKS[4], hostType: 'school' },
-    { ...MOCKS[2], hostType: 'tennis365' },
-    { ...MOCKS[5], hostType: 'school' },
+    { ...MOCKS[0] },
+    { ...MOCKS[1] },
+    { ...MOCKS[2] },
   ];
 
   return (
@@ -95,7 +92,7 @@ function SortBtn({ children, active }) {
 }
 
 // 一覧行: 主催列を追加した圧縮版
-function ResultRow({ date, weekday, pref, venue, title, cat, type, level, status, hostType, host }) {
+function ResultRow({ date, weekday, pref, venue, title, cat, type, level, status, host }) {
   const statusMap = {
     open: { text: '受付中', variant: 'brand' },
     fill: { text: '残りわずか', variant: 'accent' },
@@ -103,8 +100,6 @@ function ResultRow({ date, weekday, pref, venue, title, cat, type, level, status
     close: { text: '受付終了', variant: 'ink' },
   };
   const st = statusMap[status];
-  const hostLabel = hostType === 'tennis365' ? 'Tennis365 主催' : 'スクール主催';
-  const hostColor = hostType === 'tennis365' ? T.brand : T.accent;
 
   return (
     <a style={{
@@ -112,32 +107,23 @@ function ResultRow({ date, weekday, pref, venue, title, cat, type, level, status
       background: T.paper, border: `1px solid ${T.line}`, borderRadius: 4, textDecoration: 'none', color: 'inherit',
       position: 'relative', paddingLeft: 14,
     }}>
-      <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: 3, background: hostColor }} />
-      {/* 主催ラベル */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-        <span style={{
-          fontSize: 9.5, fontWeight: 700, letterSpacing: '0.08em',
-          color: hostType === 'tennis365' ? T.brandDeep : '#7a5a15',
-          background: hostType === 'tennis365' ? T.brandTint : T.accentTint,
-          padding: '2px 6px', borderRadius: 2, border: `1px solid ${hostType === 'tennis365' ? '#d4e0b0' : '#e8d4a2'}`,
-        }}>{hostLabel}</span>
+      <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: 3, background: T.accent }} />
+      {/* 日付＋都道府県＋受付状況 */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 6 }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+          <span className="ts-en" style={{ fontSize: 15, fontWeight: 800, color: T.ink, letterSpacing: '0.02em' }}>{date}</span>
+          <span style={{ fontSize: 10.5, color: weekday === '日' ? T.danger : weekday === '土' ? '#2f6db5' : T.muted, fontWeight: 600 }}>({weekday})</span>
+          <div style={{ width: 1, height: 11, background: T.lineSoft, margin: '0 2px', flexShrink: 0 }} />
+          <span style={{ fontSize: 11.5, color: T.inkSoft, fontWeight: 600 }}>{pref}</span>
+        </div>
         <TsBadge variant={st.variant} size="sm">{st.text}</TsBadge>
       </div>
-      {/* 日付＋タイトル */}
-      <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start', marginBottom: 6 }}>
-        <div style={{ textAlign: 'center', minWidth: 42, borderRight: `1px solid ${T.lineSoft}`, paddingRight: 8 }}>
-          <div className="ts-en" style={{ fontSize: 10, color: T.muted, fontWeight: 600 }}>2026</div>
-          <div className="ts-en" style={{ fontSize: 18, fontWeight: 800, color: T.ink, lineHeight: 1 }}>{date}</div>
-          <div style={{ fontSize: 10, color: weekday === '日' ? T.danger : weekday === '土' ? '#2f6db5' : T.muted, fontWeight: 600, marginTop: 2 }}>({weekday})</div>
-        </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: T.ink, lineHeight: 1.4, marginBottom: 4 }}>{title}</div>
-          <div style={{ fontSize: 10.5, color: T.muted, display: 'flex', gap: 4, alignItems: 'center' }}>
-            <svg width="9" height="11" viewBox="0 0 10 12"><path d="M5 0.5C2.5.5.5 2.5.5 5c0 3.5 4.5 6.5 4.5 6.5S9.5 8.5 9.5 5c0-2.5-2-4.5-4.5-4.5z" stroke={T.muted} strokeWidth="1" fill="none"/></svg>
-            <span style={{ fontWeight: 600, color: T.inkSoft }}>{pref}</span>
-            <span>·</span>
-            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{host || venue}</span>
-          </div>
+      {/* タイトル＋会場 */}
+      <div style={{ marginBottom: 6 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: T.ink, lineHeight: 1.4, marginBottom: 4 }}>{title}</div>
+        <div style={{ fontSize: 10.5, color: T.muted, display: 'flex', gap: 4, alignItems: 'center' }}>
+          <svg width="9" height="11" viewBox="0 0 10 12"><path d="M5 0.5C2.5.5.5 2.5.5 5c0 3.5 4.5 6.5 4.5 6.5S9.5 8.5 9.5 5c0-2.5-2-4.5-4.5-4.5z" stroke={T.muted} strokeWidth="1" fill="none"/></svg>
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{host || venue}</span>
         </div>
       </div>
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', paddingTop: 8, borderTop: `1px dashed ${T.lineSoft}` }}>

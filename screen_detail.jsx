@@ -24,14 +24,14 @@ function ScreenDetail() {
   return (
     <div className="ts-screen ts-tap" style={{ minHeight: '100%', paddingBottom: 40 }}>
       <TsHeader title="大会詳細" showBack />
-      <TsCrumb items={['HOME', '大会一覧', '365cup 団体戦']} />
+      <TsCrumb items={['HOME', '大会一覧', 'HATS夏の団体戦']} />
 
       {/* ステータスバー */}
       <div style={{
         padding: '12px 16px', background: T.paper,
         display: 'flex', alignItems: 'center', gap: 8, borderBottom: `1px solid ${T.lineSoft}`,
       }}>
-        <TsBadge variant="brand" size="sm">Tennis365 主催</TsBadge>
+        <TsBadge variant="accent" size="sm">スクール主催</TsBadge>
         <TsBadge variant="outline" size="sm">キャンセル待ち 0組</TsBadge>
       </div>
 
@@ -39,8 +39,8 @@ function ScreenDetail() {
         fontSize: 18, fontWeight: 800, color: T.ink, lineHeight: 1.5,
         margin: 0, padding: '14px 16px 12px', background: T.paper, letterSpacing: '0.01em',
       }}>
-        365cup Tecnifibreボール CUP<br/>
-        <span style={{ fontSize: 13, fontWeight: 600, color: T.muted }}>団体戦 (初級〜中級程度)</span>
+        HATS夏の団体戦 〜チーム対抗ダブルス〜<br/>
+        <span style={{ fontSize: 13, fontWeight: 600, color: T.muted }}>団体戦 (初中級程度)</span>
       </h1>
 
       {/* メイン画像 + サムネイル */}
@@ -75,8 +75,8 @@ function ScreenDetail() {
       <div id="section-venue" style={{ scrollMarginTop: TAB_BAR_H }}><TabVenue /></div>
       <div id="section-other" style={{ scrollMarginTop: TAB_BAR_H }}><TabOther /></div>
 
-      {/* この主催者の予定大会 */}
-      <TsSectionHead eyebrow="MORE FROM HOST" title="この主催者の予定大会" more="一覧" />
+      {/* 他のおすすめ大会 */}
+      <TsSectionHead eyebrow="MORE TOURNAMENTS" title="他のおすすめ大会" more="一覧" />
       <div style={{ margin: '0 16px' }}>
         <MiniCard {...MOCKS[1]} />
         <MiniCard {...MOCKS[2]} />
@@ -112,14 +112,14 @@ function TabHeading({ children }) {
 // ── タブ: 大会情報（この大会が自分に合うか判断するための概要）
 function TabInfo() {
   const rows = [
-    ['日程', '2026.08.09 (日)'],
+    ['日程', '2026.07.06 (日)'],
     ['開催時間', <>
       9:00 – 17:00<br/>
       <span style={{ color: T.muted, fontSize: 11 }}>
         9時試合開始（8時50分頃より開会式を行いますので、それまでに受付を完了してください）。時間が余った場合、希望チームには練習試合を組みます。
       </span>
     </>],
-    ['参加費', <>26,000円 税込（当日払い 現金またはPayPay可）<br/><span style={{ color: T.danger, fontSize: 11 }}>※2026年8月6日 18時以降からキャンセル料が100％かかります</span></>],
+    ['参加費', <>26,000円 税込（当日払い 現金またはPayPay可）<br/><span style={{ color: T.danger, fontSize: 11 }}>※2026年7月3日 18時以降からキャンセル料が100％かかります</span></>],
     ['種目', '団体戦（男子D・女子D・MIX）'],
     ['参加資格', 'チームのメンバー全員が初級〜中級程度であること'],
     ['チーム構成', <>男子2〜3名、女子2〜3名　計4〜6名<br/>（男子D、女子D、ミックスDの3本での対戦）</>],
@@ -223,8 +223,8 @@ function TabDetail() {
           <svg width="18" height="18" viewBox="0 0 20 20"><path d="M14 12.5v3a1.5 1.5 0 0 1-1.5 1.5A11 11 0 0 1 3 6.5 1.5 1.5 0 0 1 4.5 5h3a1 1 0 0 1 1 .8l.5 2.5-1.8 1.2a10 10 0 0 0 4.3 4.3l1.2-1.8L15 12.5a1 1 0 0 1 .8 1z" stroke={T.brand} strokeWidth="1.4" fill="none"/></svg>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 10, color: '#c4d0c1', letterSpacing: '0.08em', fontWeight: 600 }}>当日の緊急連絡先</div>
-            <div className="ts-en" style={{ fontSize: 15, fontWeight: 800, color: '#fff', letterSpacing: '0.02em' }}>080-9654-0478</div>
-            <div style={{ fontSize: 10, color: '#c4d0c1' }}>担当：澤田</div>
+            <div className="ts-en" style={{ fontSize: 15, fontWeight: 800, color: '#fff', letterSpacing: '0.02em' }}>0426-76-2677</div>
+            <div style={{ fontSize: 10, color: '#c4d0c1' }}>担当：HATS事務局</div>
           </div>
         </div>
       </div>
@@ -239,7 +239,7 @@ function TabDetail() {
         <div style={{
           marginTop: 10, padding: '10px 12px', background: T.cream, borderRadius: 3, fontSize: 11.5, color: T.inkSoft, lineHeight: 1.7,
         }}>
-          <span className="ts-en" style={{ color: T.brandDeep, fontWeight: 700 }}>k.sawada@tennis365.net</span>　担当：澤田<br/>
+          <span className="ts-en" style={{ color: T.brandDeep, fontWeight: 700 }}>info@hats-tennis.com</span>　担当：HATS事務局<br/>
           折り返しのご連絡が2営業日以上ない場合は、上記アドレスまでお申し込み状況をお問合せください。
         </div>
       </div>

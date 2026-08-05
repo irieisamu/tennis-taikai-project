@@ -6,14 +6,14 @@ function ScreenDetail() {
   return (
     <div className="ts-screen ts-tap" style={{ minHeight: '100%', paddingBottom: 90 }}>
       <TsHeader title="大会詳細" showBack />
-      <TsCrumb items={['HOME', '大会一覧', '365cup 団体戦']} />
+      <TsCrumb items={['HOME', '大会一覧', 'HATS夏の団体戦']} />
 
       {/* ステータスバー */}
       <div style={{
         padding: '12px 16px', background: T.paper,
         display: 'flex', alignItems: 'center', gap: 8, borderBottom: `1px solid ${T.lineSoft}`,
       }}>
-        <TsBadge variant="brand" size="sm">Tennis365 主催</TsBadge>
+        <TsBadge variant="accent" size="sm">スクール主催</TsBadge>
         <TsBadge variant="outline" size="sm">キャンセル待ち 0組</TsBadge>
       </div>
 
@@ -21,8 +21,8 @@ function ScreenDetail() {
         fontSize: 18, fontWeight: 800, color: T.ink, lineHeight: 1.5,
         margin: 0, padding: '14px 16px 12px', background: T.paper, letterSpacing: '0.01em',
       }}>
-        365cup Tecnifibreボール CUP<br/>
-        <span style={{ fontSize: 13, fontWeight: 600, color: T.muted }}>団体戦 (初級〜中級程度)</span>
+        HATS夏の団体戦 〜チーム対抗ダブルス〜<br/>
+        <span style={{ fontSize: 13, fontWeight: 600, color: T.muted }}>団体戦 (初中級程度)</span>
       </h1>
 
       {/* メイン画像 + サムネイル */}
@@ -42,7 +42,7 @@ function ScreenDetail() {
 
       {/* Quick facts (アイコン群) */}
       <div style={{ background: T.ink, color: '#fff', margin: '0', padding: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <FactRow icon="date" label="開催日" value="2026.08.09 (日)" />
+        <FactRow icon="date" label="開催日" value="2026.07.06 (日)" />
         <FactRow icon="time" label="時間" value="9:00 – 17:00" />
         <FactRow icon="pin" label="会場" value="京王テニスクラブ" />
         <FactRow icon="yen" label="参加費" value="¥26,000 税込" />
@@ -65,8 +65,8 @@ function ScreenDetail() {
       {tabIdx === 2 && <TabVenue />}
       {tabIdx === 3 && <TabOther />}
 
-      {/* この主催者の予定大会 */}
-      <TsSectionHead eyebrow="MORE FROM HOST" title="この主催者の予定大会" more="一覧" />
+      {/* 他のおすすめ大会 */}
+      <TsSectionHead eyebrow="MORE TOURNAMENTS" title="他のおすすめ大会" more="一覧" />
       <div style={{ margin: '0 16px' }}>
         <MiniCard {...MOCKS[1]} />
         <MiniCard {...MOCKS[2]} />
@@ -133,7 +133,7 @@ function TabOverview() {
     <div style={{ background: T.paper, padding: '16px' }}>
       <SubHead>イベント内容</SubHead>
       <p style={{ margin: 0, fontSize: 13, color: T.ink, lineHeight: 1.75, letterSpacing: '0.02em' }}>
-        Tennis365主催・運営の『365cup』。<br/>
+        HATS Tennis Academy主催・運営の団体戦イベント。<br/>
         全チームにテク二ファイバーボール缶をプレゼント！
       </p>
 
@@ -189,9 +189,9 @@ function TabOverview() {
 // ── タブ: 大会情報テーブル
 function TabInfo() {
   const rows = [
-    ['日程', '2026-08-09'],
+    ['日程', '2026-07-06'],
     ['開催時間', '9時〜17時'],
-    ['参加費', <>26,000円 税込（当日払い 現金またはPayPay可）<br/><span style={{ color: T.danger, fontSize: 11 }}>※2026年8月6日 18時以降からキャンセル料が100％かかります</span></>],
+    ['参加費', <>26,000円 税込（当日払い 現金またはPayPay可）<br/><span style={{ color: T.danger, fontSize: 11 }}>※2026年7月3日 18時以降からキャンセル料が100％かかります</span></>],
     ['種目', '団体戦（男子D・女子D・MIX）'],
     ['募集人数', '6チーム（1チーム4〜6人）'],
     ['会場', '京王テニスクラブ'],
@@ -256,8 +256,8 @@ function TabInfo() {
           <svg width="18" height="18" viewBox="0 0 20 20"><path d="M14 12.5v3a1.5 1.5 0 0 1-1.5 1.5A11 11 0 0 1 3 6.5 1.5 1.5 0 0 1 4.5 5h3a1 1 0 0 1 1 .8l.5 2.5-1.8 1.2a10 10 0 0 0 4.3 4.3l1.2-1.8L15 12.5a1 1 0 0 1 .8 1z" stroke={T.brand} strokeWidth="1.4" fill="none"/></svg>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 10, color: '#c4d0c1', letterSpacing: '0.08em', fontWeight: 600 }}>当日の緊急連絡先</div>
-            <div className="ts-en" style={{ fontSize: 15, fontWeight: 800, color: '#fff', letterSpacing: '0.02em' }}>080-9654-0478</div>
-            <div style={{ fontSize: 10, color: '#c4d0c1' }}>担当：澤田</div>
+            <div className="ts-en" style={{ fontSize: 15, fontWeight: 800, color: '#fff', letterSpacing: '0.02em' }}>0426-76-2677</div>
+            <div style={{ fontSize: 10, color: '#c4d0c1' }}>担当：HATS事務局</div>
           </div>
         </div>
       </div>
@@ -273,7 +273,7 @@ function TabInfo() {
           marginTop: 10, padding: '10px 12px', background: T.cream, borderRadius: 3, fontSize: 11.5, color: T.inkSoft, lineHeight: 1.7,
         }}>
           メールが2営業日以上無い場合はお申し込み状況を下記のメールアドレスにお問合せください。<br/>
-          <span className="ts-en" style={{ color: T.brandDeep, fontWeight: 700 }}>k.sawada@tennis365.net</span>　担当：澤田
+          <span className="ts-en" style={{ color: T.brandDeep, fontWeight: 700 }}>info@hats-tennis.com</span>　担当：HATS事務局
         </div>
       </div>
     </div>
